@@ -1,8 +1,8 @@
-
-var currentDate = moment(). format('dddd') + " "+ moment().format("08 03 2022");
+var savebtn = document.getElementsByClassName("saveBtn");
+var currentDate = moment().format('dddd') + " " + moment().format("08 03 2022");
 
 var nineAm = $("#9am");
-var tenAm =  $("#10am");
+var tenAm = $("#10am");
 var elevenAm = $("#11am");
 var twelvePm = $("#12pm");
 var onePm = $("#13pm");
@@ -15,41 +15,52 @@ var sevenPm = $("#19pm");
 
 
 
-var hour=moment().hours();
+var hour = moment().hours();
 var userInput;
 var hourSpan;
 
 
 //Date
-var interval = setInterval(function() {
+var interval = setInterval(function () {
     var momentNow = moment();
     $('#currentDay').html(momentNow.format('YYYY MMMM DD') + ' '
-    +momentNow.format('dddd')
-    .substring(0.3).toUpperCase());
-},100)
+        + momentNow.format('dddd')
+            .substring(0.3).toUpperCase());
+}, 100)
 
 
 
 
 
-function background (){
+function background() {
     var timeTest = parseInt($(this).attr("id"));
     hour = parseInt(hour);
-    console.log(timeTest);
-    console.log(hour);
-//console.log(this);
-if (hour >timeTest) {
-    $(this).addClass("past");
-} else if (hour <timeTest) {
-    $(this).addClass("future");
-} else{
-    $(this).addClass("present");
+    // console.log(timeTest);
+    // console.log(hour);
+    //console.log(this);
+    if (hour > timeTest) {
+        $(this).addClass("past");
+    } else if (hour < timeTest) {
+        $(this).addClass("future");
+    } else {
+        $(this).addClass("present");
+    }
 }
-}
+$(document).ready(function () {
+alert("hi")
+    $(".saveBtn").on("click", function () {
+        var value = $(this)
+            .siblings('.desc')
+            .val();
+        var time = $(this)
+            .siblings(".desc")
+            .attr('id');
+        console.log(time, value);
+        localStorage.setItem(time, value)
+    })
+})
 
-
-$(document).ready(function(){
-    initPage()
+$(document).ready(function () {
+    // initPage()
     background()
 })
-localStorage.setItem();
